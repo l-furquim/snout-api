@@ -4,5 +4,5 @@ import org.springframework.stereotype.Component
 
 interface NotePort {
 
-    fun newNote(title: String, content: String, userId: Int): Void;
+    fun newNote(title: String, content: String, userId: Int);
 }

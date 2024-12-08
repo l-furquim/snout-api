@@ -4,5 +4,5 @@ import com.snout.api.domain.model.Note
 
 interface NoteAdapter {
 
-    fun newNote(note: Note): Void
+    fun newNote(note: Note)
 }
