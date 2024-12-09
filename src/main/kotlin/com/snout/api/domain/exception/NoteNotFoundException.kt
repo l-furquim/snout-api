@@ -1,4 +1,4 @@
-package com.snout.api.domain.exception.handler
+package com.snout.api.domain.exception
 
 import java.lang.RuntimeException
 

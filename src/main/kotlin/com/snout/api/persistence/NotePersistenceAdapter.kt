@@ -2,7 +2,7 @@ package com.snout.api.persistence
 
 import com.snout.api.adapter.NoteAdapter
 import com.snout.api.domain.exception.SaveNoteException
-import com.snout.api.domain.exception.handler.NoteNotFoundException
+import com.snout.api.domain.exception.NoteNotFoundException
 import com.snout.api.domain.model.Note
 import com.snout.api.entity.NoteEntity
 import com.snout.api.mapper.NoteMapper
@@ -38,5 +38,20 @@ class NotePersistenceAdapter(
         }
 
         repository.updateNote(newTitle, newContent, noteId)
+    }
+
+    override fun deleteNote(noteId: Int) {
+        val note = repository.findById(noteId)
+
+        if(note.isEmpty){
+            throw NoteNotFoundException("Não foi possivel encontrar a exceção com este id: " + noteId)
+        }
+        try{
+            repository.delete(note.get())
+        }
+        catch (e: IOException){
+            throw SaveNoteException("Erro ao deletar a nota " + e.message)
+        }
+
     }
 }

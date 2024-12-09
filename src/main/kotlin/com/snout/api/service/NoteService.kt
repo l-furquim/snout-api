@@ -2,6 +2,7 @@ package com.snout.api.service
 
 import com.snout.api.adapter.NoteAdapter
 import com.snout.api.domain.exception.NoContentNoteException
+import com.snout.api.domain.exception.NoteIdNullException
 import com.snout.api.domain.model.Note
 import com.snout.api.port.NotePort
 import org.springframework.stereotype.Service
@@ -30,5 +31,13 @@ class NoteService(private val adapter: NoteAdapter): NotePort {
         }
 
         adapter.updateNote(newTitle, newContent, noteId)
+    }
+
+    override fun deleteNote(noteId: Int) {
+        if(noteId == null){
+            throw NoteIdNullException("O id da nota não pode ser nulo")
+        }
+
+        adapter.deleteNote(noteId)
     }
 }

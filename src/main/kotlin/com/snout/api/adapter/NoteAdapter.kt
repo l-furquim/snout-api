@@ -6,4 +6,5 @@ interface NoteAdapter {
 
     fun newNote(note: Note)
     fun updateNote(newTitle: String, newContent: String, noteId: Int)
+    fun deleteNote(noteId: Int)
 }
