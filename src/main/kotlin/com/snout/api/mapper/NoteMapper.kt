@@ -2,7 +2,9 @@ package com.snout.api.mapper
 
 import com.snout.api.domain.model.Note
 import com.snout.api.entity.NoteEntity
+import org.springframework.stereotype.Component
 
+@Component
 class NoteMapper {
     fun toEntity(note: Note): NoteEntity{
         return NoteEntity(
