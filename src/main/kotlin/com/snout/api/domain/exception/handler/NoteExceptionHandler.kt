@@ -3,6 +3,7 @@ package com.snout.api.domain.exception.handler
 import com.snout.api.domain.exception.NoContentNoteException
 import com.snout.api.domain.exception.NoteIdNullException
 import com.snout.api.domain.exception.NoteNotFoundException
+import com.snout.api.domain.exception.NotesNotFoundException
 import com.snout.api.domain.exception.body.GlobalExceptionBody
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.HttpStatus
@@ -47,6 +48,19 @@ class NoteExceptionHandler {
         return GlobalExceptionBody(
             errorMessage = exception.message,
             status = HttpStatus.UNAUTHORIZED.value(),
+            url = request.servletPath
+        )
+    }
+
+    @ExceptionHandler(NotesNotFoundException::class)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun notesNotFoundException(
+        exception: NotesNotFoundException,
+        request: HttpServletRequest
+    ): GlobalExceptionBody {
+        return GlobalExceptionBody(
+            errorMessage = exception.message,
+            status = HttpStatus.NO_CONTENT.value(),
             url = request.servletPath
         )
     }

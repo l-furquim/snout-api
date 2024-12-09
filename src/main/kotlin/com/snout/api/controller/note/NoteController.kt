@@ -1,11 +1,13 @@
 package com.snout.api.controller.note
 
+import com.snout.api.controller.note.dto.FindNotesByUserIdResponseDto
 import com.snout.api.controller.note.dto.NewNoteRequestDto
 import com.snout.api.controller.note.dto.UpdateNoteRequestDto
 import com.snout.api.port.NotePort
 import org.apache.coyote.Response
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
@@ -43,5 +45,11 @@ class NoteController
         return ResponseEntity.noContent().build()
     }
 
+    @GetMapping("/find/{userId}")
+    fun findNotesByUserId(@PathVariable("userId") userId: Int): ResponseEntity<FindNotesByUserIdResponseDto>{
+        val notes = notePort.findNotesByUserId(userId)
+
+        return ResponseEntity.ok().body(FindNotesByUserIdResponseDto(notes))
+    }
 
 }

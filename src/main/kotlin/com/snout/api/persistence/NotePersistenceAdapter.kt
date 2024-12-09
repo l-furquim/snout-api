@@ -9,6 +9,7 @@ import com.snout.api.mapper.NoteMapper
 import com.snout.api.persistence.repository.NoteRepository
 import org.springframework.stereotype.Component
 import java.io.IOException
+import java.util.*
 
 @Component
 class NotePersistenceAdapter(
@@ -53,5 +54,20 @@ class NotePersistenceAdapter(
             throw SaveNoteException("Erro ao deletar a nota " + e.message)
         }
 
+    }
+
+    override fun findNotesByUserId(userId: Int): Optional<List<Note>> {
+        val notes = repository.findNotesByUserId(userId)
+
+        if(notes.isEmpty){
+            return Optional.empty()
+        }
+        val notesDomain: Optional<List<Note>> = Optional.of(
+            notes.get().map {
+                note ->  mapper.toDomain(note)
+            }
+        )
+
+        return notesDomain
     }
 }
