@@ -21,16 +21,16 @@ data class NoteEntity(
     val id: Int? = null,
 
     @Column
-    val title: String,
+    val title: String = "",
 
     @Column
-    val content: String,
+    val content: String = "",
 
     @Column
     val createdAt: Instant = Instant.now(),
 
     @Column
-    val author: Int,
+    val author: Int = 0,
 
     @Enumerated(EnumType.STRING)
     val status: NoteStatus = NoteStatus.NORMAL

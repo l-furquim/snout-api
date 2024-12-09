@@ -25,4 +25,17 @@ class NoteExceptionHandler {
         )
     }
 
+    @ExceptionHandler(NoteNotFoundException::class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    fun handleNoteNotFound(
+        exception: NoteNotFoundException,
+        request: HttpServletRequest
+    ): GlobalExceptionBody {
+        return GlobalExceptionBody(
+            errorMessage = exception.message,
+            status = HttpStatus.NOT_FOUND.value(),
+            url = request.servletPath
+        )
+    }
+
 }

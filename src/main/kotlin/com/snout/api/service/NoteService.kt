@@ -23,4 +23,12 @@ class NoteService(private val adapter: NoteAdapter): NotePort {
         adapter.newNote(note)
 
     }
+
+    override fun updateNote(newTitle: String, newContent: String, noteId: Int) {
+        if(newTitle.isEmpty() || newContent.isEmpty()){
+            throw NoContentNoteException("Conteudo e titulo não podem ser vazios.")
+        }
+
+        adapter.updateNote(newTitle, newContent, noteId)
+    }
 }
