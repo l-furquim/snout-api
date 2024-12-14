@@ -5,7 +5,15 @@ meta {
 }
 
 post {
-  url: http://localhost:8080/notes/new
-  body: none
+  url: http://localhost:8080/note/new
+  body: json
   auth: none
+}
+
+body:json {
+  {
+     "title": "Adorei hoje",
+     "content": "qweoijqwewjqe",
+     "userId": 1
+  }
 }

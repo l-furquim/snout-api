@@ -16,6 +16,5 @@ fun main(args: Array<String>) {
 		System.setProperty(entry.key, entry.value)
 	}
 
-
 	runApplication<ApiApplication>(*args)
 }
